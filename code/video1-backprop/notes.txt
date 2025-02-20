@@ -3,3 +3,15 @@ micrograd is an autograd (automatic gradient) engine
 it implements backpropagation
 "backpropagation allows us to evaluate the gradient of a loss function with respect to the weights of a neural network"
     backprop is a way for a neural network to learn by figuring out how much each weight affects the error.
+    it does this by calculating the rate of change (gradient) of the error for each weight, so it knows which weights to tweak and by how much to reduce the error over time.
+
+
+NNs are just a mathematical expression. what we do is
+
+1. calculate a result (forward pass)
+2. check our result against the actual result (the ground truth)
+3. look at how big our error is and how much each weight contributed to the error (backpropagation/backward pass)
+4. tune the weights with an optimizer
+5. do another forward pass
+
+backprop doesn't necessarily need to be inside a neural network. just a mathematical expression. we just use it for neural networks
