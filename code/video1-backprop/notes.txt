@@ -1,0 +1,5 @@
+we'll go through building micrograd
+micrograd is an autograd (automatic gradient) engine
+it implements backpropagation
+"backpropagation allows us to evaluate the gradient of a loss function with respect to the weights of a neural network"
+    backprop is a way for a neural network to learn by figuring out how much each weight affects the error.
