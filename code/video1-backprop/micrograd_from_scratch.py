@@ -38,13 +38,15 @@ print("slope", (d2 - d1) / h)
 
 
 class Value:
-    def __init__(self, data, _children=(), _op=""):
+    def __init__(self, data, _children=(), _op='', label=''):
         # children will help us write expression graphs
         # to see which values produce which values
         self.data = data  # store the main value in data
         self._prev = set(_children)  # stores previous values in a tuple
         self._op = _op  # the operation the prev elements performed
         # _ means the var is meant to be used internally
+        self.label = label
+
 
     def __repr__(self):  # defines how the object is represented
         return f"Value(data={self.data} prev={self._prev} operation={self._op})"
@@ -76,16 +78,19 @@ class Value:
     # handles division (obviously)
 
 
-a = Value(2.0)
+a = Value(2.0, label="a")
 # a # calls __repr__ under the hood
-b = Value(-3.0)
+b = Value(-3.0, label="b")
 # a + b # prints Value(data=-1.0)
 # works because self.data and other.data are normal floats
 # a.__add__(b) # also prints Value(data=-1.0)
-c = Value(10.0)
+c = Value(10.0, label="c")
+e = a*b; e.label = "e"
 
-d = a * b + c
-print(d)
+d = e + c; d.label = "d"
+f = Value(-2.0, label="f")
+L = d * f; L.label="L"
+print(L)
 
 def trace(root):
     # build a set of all nodes and edges in a graph
@@ -109,7 +114,7 @@ def draw_dot(root):
     for n in nodes:
         uid = str(id(n))
         # for any val in graph create a rectangular node for it
-        dot.node(name=uid, label="{ data %.4f }" % (n.data,), shape="record")
+        dot.node(name=uid, label="{ %s | data %.4f }" % (n.label, n.data), shape="record")
         if n._op:
             # if this value is the result of some operation create an op node
             dot.node(name=uid + n._op, label=n._op)
@@ -122,4 +127,4 @@ def draw_dot(root):
 
     return dot
 
-draw_dot(d).render(view=True) # d is the a*b + c above
+draw_dot(L).render(view=True) # d is the a*b + c above
