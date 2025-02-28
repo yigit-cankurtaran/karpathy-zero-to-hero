@@ -1,4 +1,6 @@
 videos/
 .DS_Store
 *.swp
+*.gv
+*.svg
 .ipynb*

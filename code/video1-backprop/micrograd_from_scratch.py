@@ -5,10 +5,8 @@ from graphviz import Digraph
 # scalar valued function f of x
 # scalar = there's a size but no direction.
 
-
 def f(x):
     return 3 * x**2 - 4 * x + 5  # 3x^2 - 4x + 5
-
 
 f(3.0)  # prints 20.0
 
@@ -89,7 +87,6 @@ c = Value(10.0)
 d = a * b + c
 print(d)
 
-
 def trace(root):
     # build a set of all nodes and edges in a graph
     nodes, edges = set(), set()
@@ -124,3 +121,5 @@ def draw_dot(root):
         dot.edge(str(id(n1)), str(id(n2)) + n2._op)
 
     return dot
+
+draw_dot(d).render(view=True) # d is the a*b + c above
